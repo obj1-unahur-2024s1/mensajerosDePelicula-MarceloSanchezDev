@@ -1,0 +1,49 @@
+import destinos.*
+import mensajeros.*
+import vehiculos.*
+import example.*
+
+describe "Realizar una serie de tests, donde se prueben las diferentes situaciones, entre ellas:" {
+
+	test "Que roberto (90kg) puede llevar un paquete que está pago en un camión que tiene un acoplado" {
+		camioneta.setCantAcoplado(1)
+		roberto.setVehiculo(camioneta)
+		roberto.setPeso(90)
+		assert.that(punteBrooklyn.dejarPasar(roberto))
+	}
+	test "Que neo con crédito no puede llevar un paquete que no está pago a la matrix."{
+		neo.cargarCredito()
+		assert.that(matrix.dejarPasar(neo))
+	}
+}
+
+describe "Hacer al menos un test por cada punto de los anteriores que demuestren su correcto funcionamiento"{
+	method initialize(){
+		empresaMensajeria.contratarMensajero(neo)
+		empresaMensajeria.contratarMensajero(roberto)
+	}
+	test"Contratar a un mensajero"{
+		
+		assert.that(empresaMensajeria.mensajeros().size() > 1)
+	}
+	test"Despedir a un mensajero"{
+		empresaMensajeria.despedirMensajero(neo)
+		assert.equals(1,empresaMensajeria.mensajeros().size())
+	}
+	test"Despedir a todos los mensajeros"{
+		empresaMensajeria.despedirTodos()
+		assert.equals(0,empresaMensajeria.mensajeros().size())
+	}
+	test"Analizar si la mensajeria es grande (si tiene mas de dos mensajeros)"{
+		assert.that(empresaMensajeria.esMensajeriaGrende())
+	}
+	test"Consultar si el paquete puede ser entregado por el primer empleado de la la empresa de mensajería."{
+		assert.that(empresaMensajeria.elPimeroPuedeEntregarElPaquete(matrix))
+	}
+	test"Saber el peso del último mensajero de la empresa."{
+		roberto.setVehiculo(bicicleta)
+		roberto.setPeso(90)
+		assert.equals(95,empresaMensajeria.pesoUltimoMensajero())
+	}
+
+}
