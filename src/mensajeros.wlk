@@ -52,4 +52,17 @@ object neo {
 		tieneCredito = !tieneCredito
 	}
 }
+object marcelo {
+
+	const peso = 80
+	const puedeLlamar = true
+
+	method recibeLlamado() {
+		return puedeLlamar
+	}
+	method peso(){
+		return peso
+	}
+	
+}
 
